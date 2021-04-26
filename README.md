@@ -1,20 +1,65 @@
-# Creating Python programs in Codio
+#include <iostream> 
+#include <string> 
 
-### Make a new file
-Use **File > New File...** or right-click in the file tree to create a new file. You can right-click in the file tree to rename or delete files.
+using namespace std; 
 
-As Codio detects which file is in focus, simply put your cursor into whichever code editor you want to run.
+string new_mes(string str, int shift); 
 
-### Run your code
-Use the Run button (that looks like a Rocketship) to Run the file your cursor is in.
+int main()
+{
+    string mes, code;  
+    int shift; 
 
-### Debug your code
-Use the "Debug Current File" on the far right of the top menu bar to launch the debugger targeting the file your cursor is in.
+    cout << "Please enter a message: " << endl; 
+    getline(cin, mes);  
 
-### Reconfigure your Panels for easier development
-Use the **View > Panels** menu on the top tool bar to segment your screen.
+    cout << "Enter shift amount? ";
+    cin >> shift; 
 
-Simply drag the tab of the file or terminal (the part with the name) you want to move into the new panel.
+    while (shift < 1)
+    {
+        cout << "You have entered an invalid number. "<< endl; 
+        cout << "Please try again." << endl; 
+        cout << "Enter number" << endl; 
+        cin >> shift; 
+    }
+
+    code = new_mes(mes, shift); 
+
+    cout << "Encoded message: " << code << endl; 
 
 
-# classfinal
+    return 0;
+}
+
+string new_mes(string str, int shift)
+{
+    string num = str; 
+    int length; 
+
+    length = (int)num.length(); 
+
+    for (int i = 0; i < length; i++)
+    {
+        if (isalpha(num[i]))
+        {
+            for (int j = 0; j < shift; j++)
+            {
+                if (num[i] == 'z')
+                {
+                    num[i] = 'a'; 
+                }
+                else if (num[i] == 'Z')
+                {
+                    num[i] = 'A'; 
+                }
+                else 
+                {
+                    num[i]++; 
+                }
+            }
+        }
+    }
+
+    return num; 
+}
